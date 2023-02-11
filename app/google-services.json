@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "264678527175",
+    "firebase_url": "https://sutdup-a7537-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "sutdup-a7537",
+    "storage_bucket": "sutdup-a7537.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264678527175:android:fc48a19fa02c1a723a2ee2",
+        "android_client_info": {
+          "package_name": "com.application.sutdup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264678527175-tf4jnp9ufso3p1jf8b9fokgnukb4e1hi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGMiUq_JU4mYv7THQU8L5PGU4SWgYvM3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264678527175-tf4jnp9ufso3p1jf8b9fokgnukb4e1hi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
