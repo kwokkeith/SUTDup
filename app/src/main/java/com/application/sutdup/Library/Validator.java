@@ -24,7 +24,7 @@ public class Validator {
 
     public static void isSentence(String input) throws Exception {
         /*
-         * Check that input <String> contains letters or whitespaces.
+         * Check that input <String> contains letters and/or whitespaces.
          */
         if(!Pattern.matches("[a-zA-Z\\s]*", input)){
             throw new ValidatorException("isSentence", "Input String must contain only letters" +
@@ -249,6 +249,9 @@ public class Validator {
     }
 
     public static void isUpToTwoDecimal(String input) throws Exception{
+        /*
+        *   Check if an input string is at most 2 decimal place
+         */
         if(!(input.matches("^\\d+\\.\\d{0,2}$"))){
             throw new ValidatorException("isUpToTwoDecimal", "Input String is not up to 2 decimal" +
                     "places. (Exceeds 2 decimal places)");

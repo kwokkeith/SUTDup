@@ -12,8 +12,10 @@ public class MainApp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        // TODO: To set layout of UI
+
+        // TODO: To set layout of UI (next line)
         //setContentView(R.layout.activity_main);
+
 
         Database.main();
     }
