@@ -48,3 +48,7 @@ local.properties
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
 .idea/gradle.xml
 local.properties
+*.lock
+*.bin
+.idea/gradle.xml
+*.properties
