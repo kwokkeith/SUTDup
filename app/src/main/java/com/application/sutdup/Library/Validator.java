@@ -15,15 +15,15 @@ public class Validator {
  */
 
     public static void isWord(String input) throws Exception {
-        /**
-         * Check that input <String> contains ONLY letters.
+        /*
+          Check that input <String> contains ONLY letters.
          */
         if (!Pattern.matches("[a-zA-Z]+", input))
             throw new ValidatorException("isWord", "Input String must contain only letters") ;
     }
 
     public static void isSentence(String input) throws Exception {
-        /**
+        /*
          * Check that input <String> contains letters or whitespaces.
          */
         if(!Pattern.matches("[a-zA-Z\\s]*", input)){
@@ -32,22 +32,22 @@ public class Validator {
         };
     }
 
-    public static void lengthCheck(String input, int length) throws Exception {
-        /**
-         *  Check that input <String> length is at most length <Integer>
+    public static void lengthCheck(String input, int atMostLength) throws Exception {
+        /*
+         *  Check that input <String> length is at most atMostLength <Integer>
          */
-        if (length < 0)
+        if (atMostLength < 0)
         {
             throw new ValidatorException("lengthCheck", "Input length cannot be less than 0");
         }
-        if( !(input.length() <= length)) {
+        if( !(input.length() <= atMostLength)) {
             throw new ValidatorException("lengthCheck", "Input String exceeded the length of " +
-                    Integer.toString(length)) ;
+                    Integer.toString(atMostLength)) ;
         };
     }
 
     public static void lengthCheck(String input, int min, int max) throws Exception {
-        /**
+        /*
          * Check that input <String> length is at most max <Integer> and at least min <Integer>
          **/
 
@@ -129,8 +129,7 @@ public class Validator {
 
     }
 
-    private static boolean checkPass(String password)
-    {
+    private static boolean checkPass(String password) throws Exception {
         /**
          * Takes in a password string and checks if it contains number, capital and lowercase
          * letters, and special character.
@@ -140,14 +139,19 @@ public class Validator {
         boolean containsLow = false;
         boolean containsSpecialCharacter = false;
         char c;
+        try{
+            hasSpecialCharacter(password);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         for (int i=0; i < password.length(); i++)
         {
             c = password.charAt(i);
             if (Character.isDigit(c)) containsNum = true;
             else if (Character.isUpperCase(c)) containsCap = true;
             else if (Character.isLowerCase(c)) containsLow = true;
-            else if (hasSpecialCharacter(password)) containsSpecialCharacter = true;
-            if (containsNum && containsLow && containsCap && containsSpecialCharacter)
+            if (containsNum && containsLow && containsCap)
             {
                 return true;
             }
@@ -165,7 +169,19 @@ public class Validator {
                return;
            }
        }
-        throw new ValidatorException( "hasSpace", "Input String does not contain whitespace");
+        throw new ValidatorException( "hasSpace", "Input String contains no whitespace");
+    }
+
+    public static void isValidId(String input) throws Exception
+    {
+        /**
+         * Check if input string is a valid ID, contains number and letters only
+         */
+        if(!Pattern.matches("[a-zA-Z0-9]*", input)){
+            throw new ValidatorException("isValidId", "Input String must contain letters" +
+                    "and/or numbers only") ;
+        };
+
     }
 
     public static void hasSpecialCharacter(String input) throws Exception
@@ -218,4 +234,44 @@ public class Validator {
         throw new ValidatorException( "isDate", "Input String is not a valid date format" +
                 ", format should be in dd/mm/yyyy");
     }
+
+    public static void isValidImageFile(String input) throws Exception
+    {
+        /*
+        * Checks if String input is a valid image file extension
+         */
+        Pattern sPattern = Pattern.compile("[^\\\\s]+(\\\\.(?i)(jpe?g|png|gif|bmp))$");
+        Matcher sMatcher = sPattern.matcher(input);
+        if(!sMatcher.matches()){
+            throw new ValidatorException( "isValidImageFile", "Input String is not a valid" +
+                    "image file extension");
+        }
+    }
+
+    public static void isUpToTwoDecimal(String input) throws Exception{
+        if(!(input.matches("^\\d+\\.\\d{0,2}$"))){
+            throw new ValidatorException("isUpToTwoDecimal", "Input String is not up to 2 decimal" +
+                    "places. (Exceeds 2 decimal places)");
+        }
+    }
+
+    public static void isEmpty(String input) throws Exception
+    {
+        /*
+        * Checks if input string is an empty string, throws Exception.
+         */
+        if (!(input.matches("[^$]"))){
+           throw new ValidatorException( "isEmpty", "Input String is not empty");
+        }
+    }
+
+    public static boolean isEmptyBool(String input)
+    {
+        /*
+         * Checks if input string is an empty string, returns Boolean
+         */
+        return input.matches("[^$]");
+    }
+
 }
+

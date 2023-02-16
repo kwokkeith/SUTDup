@@ -19,6 +19,7 @@ import kotlin.text.UStringsKt;
 
 public abstract class Database extends Database_Constants{
     // Editors: Kwok Keith
+
     private final FirebaseFirestore db;
 
     public Database(){
@@ -30,10 +31,12 @@ public abstract class Database extends Database_Constants{
         return db;
     }
 
-    protected DocumentReference insertCollectionGenID(String collectionPath, Map<String, Object> data){
+    protected DocumentReference insertCollectionGenID(String collectionPath,
+                                                      Map<String, Object> data){
         /**
          * This function inserts the data stored in a Hashmap format into the appropriate
-         * collections folder in firebase.
+         * collections folder in firebase, it will generate automatically an ID for its document
+         * name.
          *
          * @param collectionPath the collection name on firebase to store this data entry
          * @param data the HashMap of the data to be stored (key, value)
@@ -42,5 +45,20 @@ public abstract class Database extends Database_Constants{
         DocumentReference newDataRef = db.collection(collectionPath).document();
         newDataRef.set(data);
         return newDataRef;
+    }
+
+    protected void insertCollection(String collectionPath, String Id, Map<String, Object> data){
+    /**
+     * This function inserts the data stored in a Hashmap format into the appropriate
+     * collections folder in firebase,
+     *
+     * @param collectionPath the collection name on firebase to store this data entry
+     * @param Id the Id <String> used as the ID for the firebase document.
+     * @param data the HashMap of the data to be stored (key, value)
+     * @return null
+     */
+
+    db.collection(collectionPath).document(Id).set(data);
+
     }
 }
