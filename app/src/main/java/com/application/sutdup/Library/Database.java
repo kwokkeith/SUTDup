@@ -18,9 +18,8 @@ import java.util.Map;
 import kotlin.text.UStringsKt;
 
 public abstract class Database extends Database_Constants{
+    // Editors: Kwok Keith
     private final FirebaseFirestore db;
-
-
 
     public Database(){
         // To Connect to FirebaseFirestore instance

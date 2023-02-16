@@ -7,9 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShopDb extends Database {
+    //Editors: Kwok Keith
 
     public void insertData(String shopName, ArrayList<Integer> followers, String contactDescription,
     ArrayList<Integer> itemsOwned, String shopImage){
+        try {
+            if( Validator.isSentence(shopName) ){
+
+            }
+        }
 
 
         Map<String, Object> data = new HashMap<>();
