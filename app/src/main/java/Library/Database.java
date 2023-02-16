@@ -18,7 +18,7 @@ public class Database {
         user.put("born", 1815);
 
 // Add a new document with a generated ID
-        db.collection("users")
+        db.collection("users") //Hi!!
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
