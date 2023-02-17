@@ -9,7 +9,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.application.sutdup.Library.ui.HomeFragment;
 import com.application.sutdup.Library.ui.ProfileFragment;
-import com.application.sutdup.Library.ui.SettingsFragment;
+import com.application.sutdup.Library.ui.SearchFragment;
+import com.application.sutdup.Library.ui.SearchFragment;
 import com.application.sutdup.R;
 import com.application.sutdup.databinding.ActivityMainBinding;
 
@@ -36,7 +37,7 @@ public class MainApp extends AppCompatActivity {
                     replaceFragment(new ProfileFragment());
                     break;
                 case R.id.search:
-                    replaceFragment(new SettingsFragment() );
+                    replaceFragment(new SearchFragment());
                     break;
             }
 
