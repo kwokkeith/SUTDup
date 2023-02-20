@@ -8,7 +8,28 @@
     tools:context=".HomeFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home Fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to SUTDup"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        android:textColor="#FF0000"
+        android:textColorLink="#8DE67F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal"
+        android:text="Today's Deal"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
