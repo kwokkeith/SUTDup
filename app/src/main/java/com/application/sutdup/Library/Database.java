@@ -31,23 +31,23 @@ public abstract class Database extends Database_Constants{
         return db;
     }
 
+    /**
+     * This function inserts the data stored in a Hashmap format into the appropriate
+     * collections folder in firebase, it will generate automatically an ID for its document
+     * name.
+     *
+     * @param collectionPath the collection name on firebase to store this data entry
+     * @param data the HashMap of the data to be stored (key, value)
+     * @return DocumentReference object with the auto-generated id
+     */
     protected DocumentReference insertCollectionGenID(String collectionPath,
                                                       Map<String, Object> data){
-        /**
-         * This function inserts the data stored in a Hashmap format into the appropriate
-         * collections folder in firebase, it will generate automatically an ID for its document
-         * name.
-         *
-         * @param collectionPath the collection name on firebase to store this data entry
-         * @param data the HashMap of the data to be stored (key, value)
-         * @return DocumentReference object with the auto-generated id
-         */
+
         DocumentReference newDataRef = db.collection(collectionPath).document();
         newDataRef.set(data);
         return newDataRef;
     }
 
-    protected void insertCollection(String collectionPath, String Id, Map<String, Object> data){
     /**
      * This function inserts the data stored in a Hashmap format into the appropriate
      * collections folder in firebase,
@@ -57,6 +57,8 @@ public abstract class Database extends Database_Constants{
      * @param data the HashMap of the data to be stored (key, value)
      * @return null
      */
+    protected void insertCollection(String collectionPath, String Id, Map<String, Object> data){
+
 
     db.collection(collectionPath).document(Id).set(data);
 
