@@ -15,6 +15,7 @@ import com.application.sutdup.R;
 import com.application.sutdup.databinding.ActivityMainBinding;
 
 public class MainApp extends AppCompatActivity {
+    //Editors : Sufi
 
     private ActivityMainBinding binding;
 
