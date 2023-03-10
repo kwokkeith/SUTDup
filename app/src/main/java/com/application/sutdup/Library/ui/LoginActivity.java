@@ -19,6 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+
 import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
@@ -58,6 +62,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if(getPassword.equals(passwordTxt)){
                                     Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+
+                                    SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString("currentUser", phoneTxt);
+                                    editor.apply();
+
                                     startActivity(new Intent(LoginActivity.this, MainApp.class));
                                     finish();
                                 }
