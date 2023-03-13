@@ -29,9 +29,8 @@ public class HomeActivity extends AppCompatActivity {
     MyAdapter myAdapter;
     ArrayList<ShopData> shopDataArrayList;
 
-    TextView userName;
+    TextView userNameTextView;
     private String userId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,21 +38,20 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         recyclerView = findViewById(R.id.shopList);
-
-
+        userNameTextView = findViewById(R.id.userNameTextView);
 
         // Retrieve the stored user ID from SharedPreferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = preferences.getString("name_key", "");
 
-        userName.setText(userId);
+        userNameTextView.setText(userId);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         shopDataArrayList = new ArrayList<>();
-        myAdapter = new MyAdapter(this,shopDataArrayList);
+        myAdapter = new MyAdapter(this, shopDataArrayList);
         recyclerView.setAdapter(myAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -83,21 +81,18 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.search:
-                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
                         return true;
                     case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
-
+                        return true;
                 }
                 return false;
             }
         });
-
-
-
     }
 }

@@ -1,4 +1,4 @@
-package com.application.sutdup.Library;
+package com.application.sutdup.Library.db;
 
 public class Database_Constants {
     // Editors: Kwok Keith
