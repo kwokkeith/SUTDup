@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.application.sutdup.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,6 +29,9 @@ public class HomeActivity extends AppCompatActivity {
     MyAdapter myAdapter;
     ArrayList<ShopData> shopDataArrayList;
 
+    TextView userName;
+    private String userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,15 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         recyclerView = findViewById(R.id.shopList);
+
+
+
+        // Retrieve the stored user ID from SharedPreferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        userId = preferences.getString("name_key", "");
+
+        userName.setText(userId);
+
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -46,8 +61,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-
-
                     ShopData shopData = dataSnapshot.getValue(ShopData.class);
                     shopDataArrayList.add(shopData);
                 }

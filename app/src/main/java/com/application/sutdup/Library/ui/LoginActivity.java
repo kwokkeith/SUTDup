@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     //Editors : Sufi
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sutdup-a7537-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
+    //Shared preference
+    SharedPreferences sharedpreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.password);
         Button loginBtn = findViewById(R.id.loginBtn);
         TextView registerNowBtn = findViewById(R.id.registerNowBtn);
+
+
+
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +60,17 @@ public class LoginActivity extends AppCompatActivity {
                             if(snapshot.hasChild(phoneTxt)){
 
                                 String getPassword = snapshot.child(phoneTxt).child("password").getValue(String.class);
+                                String name = snapshot.child(phoneTxt).child("name").getValue(String.class);
 
                                 if(getPassword.equals(passwordTxt)){
                                     Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                    Intent pass = new Intent(LoginActivity.this, HomeActivity.class);
+
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString("name_key", snapshot.child(phoneTxt).child("name").getValue(String.class));
+                                    editor.apply();
+                                    startActivity(pass);
                                     finish();
                                 }
                                 else {
