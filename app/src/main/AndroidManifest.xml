@@ -12,24 +12,33 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.SUTDup">
+        <activity
+            android:name=".Library.ui.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Library.ui.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainApp"
+            android:exported="true"
+            android:theme="@style/Theme.SUTDup.NoActionBar" />
+        <activity
+            android:name=".Library.ui.ItemList"
+            android:exported="true"
+            android:theme="@style/Theme.SUTDup.NoActionBar" />
+        <activity
+            android:name=".Library.ui.RegisterActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SUTDup.NoActionBar" />
+        <activity
+            android:name=".Library.ui.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SUTDup.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-        <activity android:name=".MainApp"
-            android:theme="@style/Theme.SUTDup.NoActionBar"
-            android:exported="true"/>
-
-        <activity android:name=".Library.ui.RegisterActivity"
-            android:theme="@style/Theme.SUTDup.NoActionBar"
-            android:exported="true"/>
-
-        <activity android:name=".Library.ui.LoginActivity"
-            android:theme="@style/Theme.SUTDup.NoActionBar"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

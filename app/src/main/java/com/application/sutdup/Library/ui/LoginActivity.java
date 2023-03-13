@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if(getPassword.equals(passwordTxt)){
                                     Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginActivity.this, MainApp.class));
+                                    startActivity(new Intent(LoginActivity.this, ItemList.class));
                                     finish();
                                 }
                                 else {

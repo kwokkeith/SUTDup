@@ -1,5 +1,6 @@
 package com.application.sutdup;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.application.sutdup.Library.ui.HomeFragment;
+import com.application.sutdup.Library.ui.ItemList;
 import com.application.sutdup.Library.ui.ProfileFragment;
 import com.application.sutdup.Library.ui.SearchFragment;
 import com.application.sutdup.Library.ui.SearchFragment;
@@ -24,7 +26,7 @@ public class MainApp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_item_list);
         replaceFragment(new HomeFragment());
 
         binding.bottomNavView.setOnItemSelectedListener(item -> {
@@ -33,6 +35,7 @@ public class MainApp extends AppCompatActivity {
 
                 case R.id.home:
                     replaceFragment(new HomeFragment());
+                    //startActivity(new Intent(getApplicationContext(), MainApp.class));
                     break;
                 case R.id.profile:
                     replaceFragment(new ProfileFragment());
