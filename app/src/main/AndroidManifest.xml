@@ -19,11 +19,7 @@
             android:name=".Library.ui.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".MainApp"
-            android:exported="true"
-            android:theme="@style/Theme.SUTDup.NoActionBar" />
-        <activity
-            android:name=".Library.ui.ItemList"
+            android:name=".Library.ui.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.SUTDup.NoActionBar" />
         <activity

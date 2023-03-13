@@ -33,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
                     case R.id.search:
                         return true;
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),ItemList.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:

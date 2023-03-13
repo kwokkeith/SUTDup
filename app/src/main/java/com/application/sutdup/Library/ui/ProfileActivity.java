@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),ItemList.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
