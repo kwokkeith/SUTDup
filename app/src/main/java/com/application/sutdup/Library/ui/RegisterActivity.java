@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.password);
         EditText confirmPass = findViewById(R.id.confirmPassword);
         TextView loginNowBtn = findViewById(R.id.loginNowBtn);
+        EditText name = findViewById(R.id.name);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String phoneTxt = phone.getText().toString();
                 String passwordTxt = password.getText().toString();
                 String conPasswordTxt = confirmPass.getText().toString();
+                String nameTxt = name.getText().toString();
 
                 if(phoneTxt.isEmpty() || passwordTxt.isEmpty() || conPasswordTxt.isEmpty()){
                     Toast.makeText(RegisterActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
@@ -60,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                             else{
 
                                 databaseReference.child("users").child(phoneTxt).child("password").setValue(passwordTxt);
-
+                                databaseReference.child("users").child(phoneTxt).child("name").setValue(nameTxt);
 
                                 Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 finish();
