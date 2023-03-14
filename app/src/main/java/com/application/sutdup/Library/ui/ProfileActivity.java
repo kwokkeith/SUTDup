@@ -6,6 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.view.View;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 import com.application.sutdup.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,6 +47,13 @@ public class ProfileActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        Button gotoeditprofile = findViewById(R.id.gotoeditprofile);
+        gotoeditprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
+            }
+        });
     }
+
 }
