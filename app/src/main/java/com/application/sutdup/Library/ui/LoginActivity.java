@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                                     SharedPreferences.Editor editor = preferences.edit();
                                     editor.putString("name_key", snapshot.child(phoneTxt).child("name").getValue(String.class));
+                                    editor.putString("userId_key", phoneTxt);
                                     editor.apply();
                                     startActivity(pass);
                                     finish();
