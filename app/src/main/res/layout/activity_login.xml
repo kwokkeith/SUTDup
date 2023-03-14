@@ -6,27 +6,31 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Library.ui.LoginActivity">
+    tools:context=".Library.ui.LoginActivity"
+    android:background="@drawable/mob">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:textStyle="bold"
         android:gravity="center"
-        android:textColor="#CC000000"
-        android:fontFamily="sans-serif-condensed"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:text="Login Here"
 
         />
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
         android:hint="Mobile"
+        android:textColorHint="@color/black"
+        android:drawableLeft="@drawable/baseline_phone_iphone_24"
+        android:drawablePadding="20dp"
+        android:background="@drawable/custom_edittext"
         android:inputType="phone"
         android:maxLines="1"
         android:paddingStart="20dp"
@@ -34,10 +38,13 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
         android:hint="Password"
+        android:background="@drawable/custom_edittext"
+        android:drawableLeft="@drawable/baseline_info_24"
+        android:drawablePadding="20dp"
+        android:textColorHint="@color/black"
         android:id="@+id/password"
         android:inputType="textPassword"
         android:maxLines="1"
@@ -46,11 +53,13 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/custom_edittext"
         android:text="Login"
         />
 
