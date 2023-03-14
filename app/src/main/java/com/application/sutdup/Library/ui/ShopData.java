@@ -2,24 +2,38 @@ package com.application.sutdup.Library.ui;
 
 public class ShopData {
 
-    public String name;
-    public int price;
+    public String itemId,userId;
+    public String itemName,itemPrice;
 
-
-    public String getName() {
-        return name;
+    public String getItemId() {
+        return itemId;
     }
 
-
-    public int getPrice() {
-        return price;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(String itemPrice) {
+        this.itemPrice = itemPrice;
     }
 }

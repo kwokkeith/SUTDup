@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.sutdup.R;
+import com.google.firebase.firestore.auth.User;
 
 import org.w3c.dom.Text;
 
@@ -37,7 +38,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
          ShopData data = shopDataArrayList.get(position);
-         holder.name.setText(data.getName());
+         holder.name.setText(data.getItemName());
+        holder.itemPrice.setText(data.getItemPrice());
     }
 
     @Override
@@ -48,11 +50,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
 
-        TextView name;
+        TextView name,itemPrice;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.shoptv);
+            itemPrice = itemView.findViewById(R.id.itemPrice);
         }
     }
 }

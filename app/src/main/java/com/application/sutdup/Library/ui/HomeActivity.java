@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sutdup-a7537-default-rtdb.asia-southeast1.firebasedatabase.app/");
     MyAdapter myAdapter;
     ArrayList<ShopData> shopDataArrayList;
+    ArrayList<UserData> userDataArrayList;
 
     TextView userNameTextView;
     private String userId;
@@ -46,11 +48,12 @@ public class HomeActivity extends AppCompatActivity {
 
         userNameTextView.setText(userId);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference = FirebaseDatabase.getInstance().getReference("items");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         shopDataArrayList = new ArrayList<>();
+        userDataArrayList = new ArrayList<>();
         myAdapter = new MyAdapter(this, shopDataArrayList);
         recyclerView.setAdapter(myAdapter);
 
@@ -59,7 +62,18 @@ public class HomeActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    System.out.println(snapshot.getChildren());
                     ShopData shopData = dataSnapshot.getValue(ShopData.class);
+
+
+
+                    //Checking if we are retreiving the values from the database
+
+                    Log.i("UserId", shopData.getUserId());
+                    Log.i("ItemName", shopData.getItemName());
+                    Log.i("ItemPrice", shopData.getItemPrice());
+
+                    //add to the values to te array list
                     shopDataArrayList.add(shopData);
                 }
                 myAdapter.notifyDataSetChanged();
