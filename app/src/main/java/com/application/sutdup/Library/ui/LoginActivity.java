@@ -4,14 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.application.sutdup.MainApp;
 import com.application.sutdup.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,17 +20,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
-
-import org.w3c.dom.Text;
-
 public class LoginActivity extends AppCompatActivity {
 
     //Editors : Sufi
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sutdup-a7537-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
+    //Shared preference
+    SharedPreferences sharedpreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.password);
         Button loginBtn = findViewById(R.id.loginBtn);
         TextView registerNowBtn = findViewById(R.id.registerNowBtn);
+
+
+
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,16 +60,18 @@ public class LoginActivity extends AppCompatActivity {
                             if(snapshot.hasChild(phoneTxt)){
 
                                 String getPassword = snapshot.child(phoneTxt).child("password").getValue(String.class);
+                                String name = snapshot.child(phoneTxt).child("name").getValue(String.class);
 
                                 if(getPassword.equals(passwordTxt)){
                                     Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
+                                    Intent pass = new Intent(LoginActivity.this, HomeActivity.class);
 
-                                    SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                                     SharedPreferences.Editor editor = preferences.edit();
-                                    editor.putString("currentUser", phoneTxt);
+                                    editor.putString("name_key", snapshot.child(phoneTxt).child("name").getValue(String.class));
+                                    editor.putString("userId_key", phoneTxt);
                                     editor.apply();
-
-                                    startActivity(new Intent(LoginActivity.this, MainApp.class));
+                                    startActivity(pass);
                                     finish();
                                 }
                                 else {

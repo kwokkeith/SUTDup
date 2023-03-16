@@ -13,10 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SUTDup">
         <activity
-            android:name=".userlist"
+            android:name=".Library.ui.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MainApp"
+            android:name=".Library.ui.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Library.ui.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Library.ui.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.SUTDup.NoActionBar" />
         <activity

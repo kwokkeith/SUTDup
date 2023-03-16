@@ -1,4 +1,4 @@
-package com.application.sutdup.Library;
+package com.application.sutdup.Library.db;
 
 import com.application.sutdup.Exceptions.ValidatorException;
 
