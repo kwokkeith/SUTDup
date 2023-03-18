@@ -2,6 +2,7 @@ package com.application.sutdup.Library.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -44,11 +45,17 @@ public class EditProfileActivity extends AppCompatActivity {
         // Retrieve the values entered by the user in these EditText widgets
         String itemName = editTextItemName.getText().toString().trim();
         String itemPrice = editTextItemPrice.getText().toString().trim();
+        String newItemKey = databaseReference.child("items").push().getKey();
 
         // Do something with these values, e.g., save them to a database
-        databaseReference.child("items").child("1").child("itemName").setValue(itemName);
-        databaseReference.child("items").child("1").child("itemPrice").setValue(itemPrice);
-        databaseReference.child("items").child("1").child("userId").setValue(userId);
+        ShopData shopdata = new ShopData(userId, newItemKey, itemName, itemPrice);
+        databaseReference.child("items").child(newItemKey).setValue(shopdata);
+
+        //to go back to profile page
+        Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+        startActivity(intent);
+        finish();
+
 
     }
 });

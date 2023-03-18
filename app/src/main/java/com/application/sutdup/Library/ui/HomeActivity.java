@@ -69,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     //Checking if we are retreiving the values from the database
 
+
                     Log.i("UserId", shopData.getUserId());
                     Log.i("ItemName", shopData.getItemName());
                     Log.i("ItemPrice", shopData.getItemPrice());

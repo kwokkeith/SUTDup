@@ -61,8 +61,11 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                             else{
 
-                                databaseReference.child("users").child(phoneTxt).child("password").setValue(passwordTxt);
-                                databaseReference.child("users").child(phoneTxt).child("name").setValue(nameTxt);
+                                UserData userData = new UserData(nameTxt,passwordTxt,phoneTxt);
+                                databaseReference.child("users").child(phoneTxt).setValue(userData);
+
+//                                databaseReference.child("users").child(phoneTxt).child("password").setValue(passwordTxt);
+//                                databaseReference.child("users").child(phoneTxt).child("name").setValue(nameTxt);
 
                                 Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 finish();

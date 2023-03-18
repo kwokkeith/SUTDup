@@ -2,7 +2,7 @@ package com.application.sutdup.Library.ui;
 
 public class ShopData {
 
-    public String itemId,userId;
+    public String userId, itemId;
     public String itemName,itemPrice;
 
     public String getItemId() {
@@ -36,4 +36,16 @@ public class ShopData {
     public void setItemPrice(String itemPrice) {
         this.itemPrice = itemPrice;
     }
+
+    ShopData(String userId, String itemId ,String itemName, String itemPrice) {
+        this.userId = userId;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemId = itemId;
+    }
+    ShopData(){}
+
+
+
+
 }

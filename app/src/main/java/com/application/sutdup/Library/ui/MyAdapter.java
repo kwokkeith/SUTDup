@@ -40,6 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
          ShopData data = shopDataArrayList.get(position);
          holder.name.setText(data.getItemName());
         holder.itemPrice.setText(data.getItemPrice());
+        holder.sellerName.setText(data.getUserId());
     }
 
     @Override
@@ -50,12 +51,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
 
-        TextView name,itemPrice;
+        TextView name,itemPrice,sellerName;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.shoptv);
             itemPrice = itemView.findViewById(R.id.itemPrice);
+            sellerName = itemView.findViewById(R.id.sellerName);
         }
     }
 }

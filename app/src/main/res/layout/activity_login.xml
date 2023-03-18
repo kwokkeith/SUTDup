@@ -35,8 +35,7 @@
         android:inputType="phone"
         android:maxLines="1"
         android:paddingStart="20dp"
-        android:paddingEnd="0dp"
-        android:drawableLeft="@drawable/baseline_person_24"/>
+        android:paddingEnd="0dp" />
 
     <EditText
         android:layout_width="match_parent"
