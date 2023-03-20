@@ -2,24 +2,120 @@ package com.application.sutdup.Library.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import com.application.sutdup.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    DatabaseReference databaseReference,databaseUser;
+    MyAdapter myAdapter;
+    ArrayList<ShopData> shopDataArrayList;
+    ArrayList<UserData> userDataArrayList;
+    private String userId;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        textView = findViewById(R.id.fuckid);
+        recyclerView = findViewById(R.id.shopList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        shopDataArrayList = new ArrayList<>();
+        userDataArrayList = new ArrayList<>();
+        myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList);
+        recyclerView.setAdapter(myAdapter);
+
+        // Retrieve the stored user ID from SharedPreferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        userId = preferences.getString("userId_key", "");
+
+        /**implementing the abstract class Database**/
+        Database database = new Database() {
+            @Override
+            public void setDatabaseReference(String path) {
+                super.setDatabaseReference(path);
+            }
+
+            @Override
+            public DatabaseReference getDatabaseReference() {
+                return super.getDatabaseReference();
+            }
+        };
+        database.setDatabaseReference("items");
+        databaseReference = database.getDatabaseReference();
+        //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    System.out.println(snapshot.getChildren());
+                    ShopData shopData = dataSnapshot.getValue(ShopData.class);
+                    if (shopData.getUserId().equals(userId)){
+                        Log.i("UserId",shopData.getUserId());
+                        //Log.i("UserId",shopData.getUserId());
+                        //add to the values to te array list
+                        shopDataArrayList.add(shopData);
+                    }
+
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        System.out.println(shopDataArrayList);
+        database.setDatabaseReference("users");
+        databaseUser = database.getDatabaseReference();
+        //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
+        databaseUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    System.out.println(snapshot.getChildren());
+                    UserData userData = dataSnapshot.getValue(UserData.class);
+                    //add to the values to te array list
+                    userDataArrayList.add(userData);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //Initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
