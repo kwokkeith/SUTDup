@@ -24,17 +24,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity{
     private SearchView searchView;
     private RecyclerView recyclerView;
-
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sutdup-a7537-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    DatabaseReference databaseReference,databaseUser;
     MyAdapter myAdapter;
     ArrayList<ShopData> shopDataArrayList;
+    ArrayList<UserData> userDataArrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+
 
         searchView = findViewById(R.id.serachView);
         searchView.clearFocus();
@@ -69,19 +72,33 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.shopList);
 
 
-        //Initialize and assign variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
-        //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.search);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("items");
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView); //Initialize and assign variable
+        bottomNavigationView.setSelectedItemId(R.id.search);  //Set Home Selected
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         shopDataArrayList = new ArrayList<>();
-        myAdapter = new MyAdapter(this, shopDataArrayList);
+        userDataArrayList = new ArrayList<>();
+        myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList);
         recyclerView.setAdapter(myAdapter);
 
+        /**implementing the abstract class Database**/
+        Database database = new Database() {
+            @Override
+            public void setDatabaseReference(String path) {
+                super.setDatabaseReference(path);
+            }
+
+            @Override
+            public DatabaseReference getDatabaseReference() {
+                return super.getDatabaseReference();
+            }
+        };
+        database.setDatabaseReference("items");
+        databaseReference = database.getDatabaseReference();
+        //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,16 +106,6 @@ public class SearchActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     System.out.println(snapshot.getChildren());
                     ShopData shopData = dataSnapshot.getValue(ShopData.class);
-
-
-
-                    //Checking if we are retreiving the values from the database
-
-
-                    Log.i("UserId", shopData.getUserId());
-                    Log.i("ItemName", shopData.getItemName());
-                    Log.i("ItemPrice", shopData.getItemPrice());
-
                     //add to the values to te array list
                     shopDataArrayList.add(shopData);
                 }
@@ -110,6 +117,30 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
+
+
+        database.setDatabaseReference("users");
+        databaseUser = database.getDatabaseReference();
+        //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
+        databaseUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    System.out.println(snapshot.getChildren());
+                    UserData userData = dataSnapshot.getValue(UserData.class);
+                    //add to the values to te array list
+                    userDataArrayList.add(userData);
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

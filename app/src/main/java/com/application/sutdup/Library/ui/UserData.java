@@ -6,7 +6,6 @@ public class UserData {
     private String password;
     private String phone;
 
-
     public String getName() {
         return name;
     }
@@ -38,4 +37,6 @@ public class UserData {
         this.password = password;
         this.phone = phone;
     }
+
 }
+
