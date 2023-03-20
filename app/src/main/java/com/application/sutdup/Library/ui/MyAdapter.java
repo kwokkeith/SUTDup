@@ -1,10 +1,14 @@
 package com.application.sutdup.Library.ui;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +45,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
          holder.name.setText(data.getItemName());
         holder.itemPrice.setText(data.getItemPrice());
         holder.sellerName.setText(data.getUserId());
+
+        byte[] decodedString = Base64.decode(data.getItemImage(), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        holder.itemImage.setImageBitmap(decodedByte);
     }
 
     @Override
@@ -52,12 +60,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
         TextView name,itemPrice,sellerName;
+        ImageView itemImage;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.shoptv);
             itemPrice = itemView.findViewById(R.id.itemPrice);
             sellerName = itemView.findViewById(R.id.sellerName);
+            itemImage = itemView.findViewById(R.id.imageView);
         }
     }
 }

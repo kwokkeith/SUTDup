@@ -4,6 +4,7 @@ public class ShopData {
 
     public String userId, itemId;
     public String itemName,itemPrice;
+    public String itemImage;
 
     public String getItemId() {
         return itemId;
@@ -37,11 +38,20 @@ public class ShopData {
         this.itemPrice = itemPrice;
     }
 
-    ShopData(String userId, String itemId ,String itemName, String itemPrice) {
+    public String getItemImage() {
+        return itemImage;
+    }
+
+    public void setItemImage(String itemImage) {
+        this.itemImage = itemImage;
+    }
+
+    ShopData(String userId, String itemId , String itemName, String itemPrice, String itemImage) {
         this.userId = userId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemId = itemId;
+        this.itemImage = itemImage;
     }
     ShopData(){}
 

@@ -47,8 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
                 return false;
             }
         });
-        Button gotoeditprofile = findViewById(R.id.gotoeditprofile);
-        gotoeditprofile.setOnClickListener(new View.OnClickListener() {
+        Button sellanitem = findViewById(R.id.sellanitem);
+        sellanitem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
