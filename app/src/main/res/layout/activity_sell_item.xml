@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/mob"
-    tools:context=".Library.ui.EditProfileActivity">
+    tools:context=".Library.ui.SellItemActivity">
 
     <EditText
         android:id="@+id/editTextItemName"
@@ -39,9 +39,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:src="@drawable/anya" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/uploaditemBtn"

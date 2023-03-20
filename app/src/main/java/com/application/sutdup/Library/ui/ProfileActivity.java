@@ -13,7 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import com.application.sutdup.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -51,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
         sellanitem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
+                startActivity(new Intent(ProfileActivity.this, SellItemActivity.class));
             }
         });
     }

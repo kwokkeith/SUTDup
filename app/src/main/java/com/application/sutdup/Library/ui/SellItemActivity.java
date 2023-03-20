@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 //this is meant to be sell item but im too lazy to change the name for it
-public class EditProfileActivity extends AppCompatActivity {
+public class SellItemActivity extends AppCompatActivity {
 
     //database reference
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sutdup-a7537-default-rtdb.asia-southeast1.firebasedatabase.app/");
@@ -41,7 +41,7 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_sell_item);
 
         EditText editTextItemName = findViewById(R.id.editTextItemName);
         EditText editTextItemPrice = findViewById(R.id.editTextItemPrice);
@@ -74,7 +74,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 databaseReference.child("items").child(newItemKey).setValue(shopdata);
 
                 //to go back to profile page
-                Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(SellItemActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -92,13 +92,14 @@ public class EditProfileActivity extends AppCompatActivity {
             try {
                 // Convert the image to a Base64 string
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 500, 500, false); // Set a fixed dimension of 500x500 pixels
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+                scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-                // Set the image to the ImageView
-                imageView.setImageBitmap(bitmap);
+// Set the image to the ImageView
+                imageView.setImageBitmap(scaledBitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();

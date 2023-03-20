@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SUTDup">
         <activity
-            android:name=".Library.ui.EditProfileActivity"
+            android:name=".Library.ui.SellItemActivity"
             android:exported="false" />
         <activity
             android:name=".Library.ui.ProfileActivity"
