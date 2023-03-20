@@ -20,11 +20,17 @@ import com.google.firebase.firestore.auth.User;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<ShopData> shopDataArrayList;
+
+    public void setFilteredList(ArrayList<ShopData> filteredList){
+        this.shopDataArrayList = filteredList;
+        notifyDataSetChanged();
+    }
 
     public MyAdapter(Context context, ArrayList<ShopData> shopData) {
         this.context = context;
