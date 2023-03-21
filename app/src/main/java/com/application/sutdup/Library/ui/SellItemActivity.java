@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -90,16 +92,32 @@ public class SellItemActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
 
             try {
-                // Convert the image to a Base64 string
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 500, 500, false); // Set a fixed dimension of 500x500 pixels
+                ExifInterface exif = new ExifInterface(getContentResolver().openInputStream(imageUri));
+                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+                Matrix matrix = new Matrix();
+                switch (orientation) {
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                        matrix.setRotate(90);
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_180:
+                        matrix.setRotate(180);
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_270:
+                        matrix.setRotate(270);
+                        break;
+                    default:
+                        // Do nothing
+                }
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
 // Set the image to the ImageView
-                imageView.setImageBitmap(scaledBitmap);
+                imageView.setImageBitmap(bitmap);
+
 
             } catch (IOException e) {
                 e.printStackTrace();
