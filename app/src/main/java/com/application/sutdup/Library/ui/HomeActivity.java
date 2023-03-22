@@ -2,6 +2,7 @@ package com.application.sutdup.Library.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 import com.application.sutdup.R;
@@ -52,11 +54,16 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
         myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList);
-        recyclerView.setAdapter(myAdapter);
+        //recyclerView.setAdapter(myAdapter);
 
+        /** Implementing Grid View**/
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(myAdapter);
 
         /**implementing the abstract class Database**/
         Database database = new Database() {

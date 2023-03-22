@@ -2,6 +2,7 @@ package com.application.sutdup.Library.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,25 +35,30 @@ public class ProfileActivity extends AppCompatActivity {
     ArrayList<ShopData> shopDataArrayList;
     ArrayList<UserData> userDataArrayList;
     private String userId;
-    TextView textView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        textView = findViewById(R.id.fuckid);
         recyclerView = findViewById(R.id.shopList);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
         myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList);
-        recyclerView.setAdapter(myAdapter);
 
         // Retrieve the stored user ID from SharedPreferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = preferences.getString("userId_key", "");
+
+
+
+        /** Implementing Grid View**/
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(myAdapter);
+
 
         /**implementing the abstract class Database**/
         Database database = new Database() {

@@ -2,6 +2,7 @@ package com.application.sutdup.Library.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,12 +77,17 @@ public class SearchActivity extends AppCompatActivity{
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView); //Initialize and assign variable
         bottomNavigationView.setSelectedItemId(R.id.search);  //Set Home Selected
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
         myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setAdapter(myAdapter);
+
+        /** Implementing Grid View**/
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(myAdapter);
 
         /**implementing the abstract class Database**/

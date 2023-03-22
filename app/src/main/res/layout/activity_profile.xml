@@ -29,13 +29,6 @@
         app:layout_constraintTop_toBottomOf="@+id/sellanitem"
         app:layout_constraintVertical_bias="0.087" />
 
-    <TextView
-        android:id="@+id/fuckid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WTF"
-
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavView" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"

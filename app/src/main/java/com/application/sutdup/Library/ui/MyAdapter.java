@@ -105,6 +105,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             sellerName = itemView.findViewById(R.id.sellerName);
             itemImage = itemView.findViewById(R.id.imageView);
         }
+
     }
 
 
