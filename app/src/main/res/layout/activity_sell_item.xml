@@ -12,10 +12,10 @@
     <EditText
         android:id="@+id/editTextItemName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:hint="Item Name"
         android:textColorHint="@color/black"
-        android:drawableLeft="@drawable/baseline_phone_iphone_24"
         android:drawablePadding="20dp"
         android:background="@drawable/custom_edittext"
         android:inputType="text"
@@ -26,13 +26,13 @@
     <EditText
         android:id="@+id/editTextItemPrice"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:hint="Item Price"
         android:textColorHint="@color/black"
-        android:drawableLeft="@drawable/baseline_phone_iphone_24"
         android:drawablePadding="20dp"
         android:background="@drawable/custom_edittext"
-        android:inputType="text"
+        android:inputType="phone"
         android:maxLines="1"
         android:paddingStart="20dp"
         android:paddingEnd="0dp"  />
@@ -41,16 +41,15 @@
         android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_margin="10dp"
         android:src="@drawable/anya" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/uploaditemBtn"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/white"
         android:background="@drawable/custom_edittext"
         android:text="Upload"

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.application.sutdup.R;
 import com.google.firebase.database.DatabaseReference;
@@ -71,6 +72,10 @@ public class SellItemActivity extends AppCompatActivity {
                 String itemPrice = editTextItemPrice.getText().toString().trim();
                 String newItemKey = databaseReference.child("items").push().getKey();
 
+                if(itemName.isEmpty() || itemPrice.isEmpty() ){
+                    Toast.makeText(SellItemActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();}
+
+                else {
                 // Do something with these values, e.g., save them to a database
                 ShopData shopdata = new ShopData(userId, newItemKey, itemName, itemPrice, imageString);
                 databaseReference.child("items").child(newItemKey).setValue(shopdata);
@@ -79,7 +84,7 @@ public class SellItemActivity extends AppCompatActivity {
                 Intent intent = new Intent(SellItemActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
-            }
+            }}
         });
     }
 
