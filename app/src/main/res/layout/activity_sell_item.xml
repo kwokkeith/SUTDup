@@ -44,7 +44,6 @@
         android:layout_margin="10dp"
         android:src="@drawable/anya" />
 
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/uploaditemBtn"
         android:layout_width="250dp"

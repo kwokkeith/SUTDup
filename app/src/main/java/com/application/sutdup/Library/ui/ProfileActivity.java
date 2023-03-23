@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import com.application.sutdup.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
     ArrayList<ShopData> shopDataArrayList;
     ArrayList<UserData> userDataArrayList;
     private String userId;
+    private FloatingActionButton addItemfab;
 
 
     @Override
@@ -44,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
         setContentView(R.layout.activity_profile);
 
         recyclerView = findViewById(R.id.shopList);
+        addItemfab =findViewById(R.id.fab);
 
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
@@ -147,10 +150,11 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
                 return false;
             }
         });
-        Button sellanitem = findViewById(R.id.sellanitem);
-        sellanitem.setOnClickListener(new View.OnClickListener() {
+
+        /**Implementing Floating Action button**/
+        addItemfab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 startActivity(new Intent(ProfileActivity.this, SellItemActivity.class));
             }
         });
