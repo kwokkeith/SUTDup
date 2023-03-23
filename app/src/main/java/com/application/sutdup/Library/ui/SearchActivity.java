@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +75,8 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
 
 
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView); //Initialize and assign variable
-        bottomNavigationView.setSelectedItemId(R.id.search);  //Set Home Selected
+        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView); //Initialize and assign variable
+        //bottomNavigationView.setSelectedItemId(R.id.search);  //Set Home Selected
 
 
         shopDataArrayList = new ArrayList<>();
@@ -147,7 +148,9 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
             }
         });
 
-
+       /*
+        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView); //Initialize and assign variable
+        //bottomNavigationView.setSelectedItemId(R.id.search);  //Set Home Selected
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -164,6 +167,27 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
                         return true;
                 }
                 return false;
+            }
+        });*/
+
+        ChipNavigationBar chipNavigationBar = findViewById(R.id.bottomNavView);
+        chipNavigationBar.setItemSelected(R.id.search,true);
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+
+                switch (i){
+                    case R.id.search:
+
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        break;
+                }
             }
         });
     }

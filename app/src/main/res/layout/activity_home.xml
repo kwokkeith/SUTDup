@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
-            android:text="Welcome to SutdUP!"
+            android:text="WELCOME TO SUTDup"
             android:textColor="@color/black"
             android:textSize="24dp"
             android:textStyle="bold"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
-            android:text="Today's Deal"
+            android:text="TODAY'S DEAL"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:textStyle="bold"
@@ -61,14 +61,21 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/bottomNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_corners"
+        android:elevation="8dp"
+        app:cnb_menuResource="@menu/bottom_nav_menu"
+        app:cnb_unselectedColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

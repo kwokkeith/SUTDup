@@ -11,10 +11,11 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="fill"
+        android:layout_weight="1"
         app:contentPadding="10dp"
-        android:layout_margin="16dp"
         app:cardElevation="8dp"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="8dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -58,7 +59,8 @@
                         android:text="ITEM: "
                         android:textColor="@color/black"
                         android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily=""/>
                     <TextView
                         android:id="@+id/shoptv"
                         android:layout_width="wrap_content"

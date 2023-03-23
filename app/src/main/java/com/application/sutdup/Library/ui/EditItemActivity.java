@@ -143,7 +143,7 @@ public class EditItemActivity extends AppCompatActivity {
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-// Set the image to the ImageView
+                // Set the image to the ImageView
                 imageView.setImageBitmap(bitmap);
 
 

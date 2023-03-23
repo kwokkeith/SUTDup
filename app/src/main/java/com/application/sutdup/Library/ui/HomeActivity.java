@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.ArrayList;
 
@@ -116,7 +117,7 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
             }
         });
 
-
+/**
         //Initialize and assign variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
         //Set Home Selected
@@ -138,6 +139,27 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
                         return true;
                 }
                 return false;
+            }
+        });
+ **/
+
+        ChipNavigationBar chipNavigationBar = findViewById(R.id.bottomNavView);
+        chipNavigationBar.setItemSelected(R.id.home,true);
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+
+                switch (i){
+                    case R.id.search:
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                        overridePendingTransition(0,0);
+                        break;
+                    case R.id.home:
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        break;
+                }
             }
         });
     }
