@@ -25,7 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class EditItemActivity extends AppCompatActivity {
-
+//random comment
     TextView itemname,itemprice;
     ImageView imageView;
     private String imageString = "";
