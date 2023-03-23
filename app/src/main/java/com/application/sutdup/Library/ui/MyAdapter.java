@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.application.sutdup.R;
@@ -38,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     Context context;
     ArrayList<ShopData> shopDataArrayList;
     ArrayList<UserData> userDataArrayList;
-    DatabaseReference databaseUser;
+    private SelectListener listener;
 
 
     public void setFilteredList(ArrayList<ShopData> filteredList){
@@ -55,6 +56,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         this.context = context;
         this.shopDataArrayList = shopData;
         this.userDataArrayList = userData;
+    }
+    public MyAdapter(Context context,ArrayList<ShopData> shopData, ArrayList<UserData> userData,SelectListener listener) {
+        this.context = context;
+        this.shopDataArrayList = shopData;
+        this.userDataArrayList = userData;
+        this.listener =listener;
     }
 
 
@@ -77,10 +84,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 holder.sellerName.setText(user.getName());
             }
         }
-        //holder.sellerName.setText(data.getUserId());
 
-
-
+        /** Clicking in each cardview**/
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClicked(shopDataArrayList.get(position));
+            }
+        });
 
         byte[] decodedString = Base64.decode(data.getItemImage(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -97,6 +108,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         TextView name,itemPrice,sellerName;
         ImageView itemImage;
+        CardView cardView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -104,6 +116,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             itemPrice = itemView.findViewById(R.id.itemPrice);
             sellerName = itemView.findViewById(R.id.sellerName);
             itemImage = itemView.findViewById(R.id.imageView);
+            cardView = itemView.findViewById(R.id.cardView);
         }
 
     }

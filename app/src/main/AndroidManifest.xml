@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SUTDup">
         <activity
+            android:name=".Library.ui.EditItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".Library.ui.SellItemActivity"
             android:exported="false" />
         <activity

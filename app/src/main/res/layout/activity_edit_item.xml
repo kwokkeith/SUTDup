@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/mob"
+    tools:context=".Library.ui.EditItemActivity">
+
+    <EditText
+        android:id="@+id/itemNameet"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_edittext"
+        android:drawablePadding="20dp"
+        android:hint="Item Name"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textColorHint="@color/black" />
+
+    <EditText
+        android:id="@+id/itemPriceet"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:hint="Item Price"
+        android:textColorHint="@color/black"
+        android:drawablePadding="20dp"
+        android:background="@drawable/custom_edittext"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"  />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editItemBtn"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/custom_edittext"
+        android:text="Edit Changes"
+        />
+
+</LinearLayout>

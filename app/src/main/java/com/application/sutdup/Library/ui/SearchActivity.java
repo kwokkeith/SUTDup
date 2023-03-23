@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity{
+public class SearchActivity extends AppCompatActivity implements SelectListener{
     private SearchView searchView;
     private RecyclerView recyclerView;
     DatabaseReference databaseReference,databaseUser;
@@ -80,7 +80,7 @@ public class SearchActivity extends AppCompatActivity{
 
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
-        myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList);
+        myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList,this);
         //recyclerView.setHasFixedSize(true);
         //recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //recyclerView.setAdapter(myAdapter);
@@ -166,5 +166,11 @@ public class SearchActivity extends AppCompatActivity{
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onItemClicked(ShopData shopData) {
+        /**Do nothing when item is clicked**/
+        return;
     }
 }

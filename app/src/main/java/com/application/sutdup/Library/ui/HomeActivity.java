@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.application.sutdup.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,12 +27,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements SelectListener {
 
     RecyclerView recyclerView;
     DatabaseReference databaseReference,databaseUser;
-    //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sutdup-a7537-default-rtdb.asia-southeast1.firebasedatabase.app/");
-    //can delete later just leave it for now!!
     MyAdapter myAdapter;
     ArrayList<ShopData> shopDataArrayList;
     ArrayList<UserData> userDataArrayList;
@@ -51,14 +50,10 @@ public class HomeActivity extends AppCompatActivity {
         userId = preferences.getString("name_key", "");
         userNameTextView.setText(userId);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
-        myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList);
-        //recyclerView.setAdapter(myAdapter);
+        myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList,this);
+
 
         /** Implementing Grid View**/
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
@@ -79,7 +74,6 @@ public class HomeActivity extends AppCompatActivity {
         };
         database.setDatabaseReference("items");
         databaseReference = database.getDatabaseReference();
-        //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -87,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     System.out.println(snapshot.getChildren());
                     ShopData shopData = dataSnapshot.getValue(ShopData.class);
-                    //add to the values to te array list
+                    //add to the values to the array list
                     shopDataArrayList.add(shopData);
                 }
                 myAdapter.notifyDataSetChanged();
@@ -146,5 +140,11 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onItemClicked(ShopData shopData) {
+        /**Do nothing when item is clicked**/
+        return;
     }
 }

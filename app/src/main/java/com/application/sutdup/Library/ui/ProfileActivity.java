@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements SelectListener {
 
     RecyclerView recyclerView;
     DatabaseReference databaseReference,databaseUser;
@@ -46,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
-        myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList);
+        myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList,this);
 
         // Retrieve the stored user ID from SharedPreferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -74,7 +75,6 @@ public class ProfileActivity extends AppCompatActivity {
         };
         database.setDatabaseReference("items");
         databaseReference = database.getDatabaseReference();
-        //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -86,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
                         Log.i("UserId",shopData.getUserId());
                         //Log.i("UserId",shopData.getUserId());
                         //add to the values to te array list
+
                         shopDataArrayList.add(shopData);
                     }
 
@@ -99,8 +100,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
-        System.out.println(shopDataArrayList);
         database.setDatabaseReference("users");
         databaseUser = database.getDatabaseReference();
         //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
@@ -157,4 +156,17 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onItemClicked(ShopData shopData) {
+        /**Push Data to another activity when cardView is clicked**/
+        String itemname = shopData.getItemName();
+        String itemprice = shopData.getItemPrice();
+        String itemid = shopData.getItemId();
+        Intent intent = new Intent(getApplicationContext(),EditItemActivity.class);
+        intent.putExtra("itemname",itemname);
+        intent.putExtra("itemprice",itemprice);
+        intent.putExtra("itemid",itemid);
+        startActivity(intent);
+
+    }
 }
