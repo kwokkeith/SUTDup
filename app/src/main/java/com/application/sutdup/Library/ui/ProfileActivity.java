@@ -166,10 +166,12 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
         String itemname = shopData.getItemName();
         String itemprice = shopData.getItemPrice();
         String itemid = shopData.getItemId();
+        String itemimage = shopData.getItemImage();
         Intent intent = new Intent(getApplicationContext(),EditItemActivity.class);
         intent.putExtra("itemname",itemname);
         intent.putExtra("itemprice",itemprice);
         intent.putExtra("itemid",itemid);
+        intent.putExtra("itemimage",itemimage);
         startActivity(intent);
 
     }

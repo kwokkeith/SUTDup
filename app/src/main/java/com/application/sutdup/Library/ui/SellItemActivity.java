@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -127,6 +128,13 @@ public class SellItemActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            // Encode the default image to a string and save it to the database
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.anya);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream.toByteArray();
+            imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
     }
 }
