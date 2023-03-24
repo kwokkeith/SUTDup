@@ -28,7 +28,7 @@ public class EditItemActivity extends AppCompatActivity {
 //random comment
     TextView itemname,itemprice;
     ImageView imageView;
-    private String imageString = "";
+    String imageString = "";
 
     Button editchangesBtn;
     DatabaseReference databaseReference;
@@ -57,6 +57,7 @@ public class EditItemActivity extends AppCompatActivity {
 
         itemname.setText(itemnamedata);
         itemprice.setText(itempricedata);
+        imageString = itemimagedata;
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +98,7 @@ public class EditItemActivity extends AppCompatActivity {
                 else {
                     reference.child(itemiddata).child("itemName").setValue(itemName);
                     reference.child(itemiddata).child("itemPrice").setValue(itemPrice);
+                    reference.child(itemiddata).child("itemImage").setValue(imageString);
 
                     Toast.makeText(EditItemActivity.this, "Successfully edited", Toast.LENGTH_SHORT).show();
                     //to go back to profile page

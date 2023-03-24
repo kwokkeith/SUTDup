@@ -53,3 +53,4 @@ local.properties
 .idea/gradle.xml
 *.properties
 local.properties
+*.properties
