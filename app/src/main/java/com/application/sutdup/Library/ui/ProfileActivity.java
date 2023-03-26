@@ -108,6 +108,7 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
         databaseUser = database.getDatabaseReference();
         //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
         databaseUser.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -116,6 +117,7 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
                     UserData userData = dataSnapshot.getValue(UserData.class);
                     //add to the values to te array list
                     userDataArrayList.add(userData);
+                    //Toast.makeText(ProfileActivity.this, "", Toast.LENGTH_SHORT).show();
                 }
                 myAdapter.notifyDataSetChanged();
             }
