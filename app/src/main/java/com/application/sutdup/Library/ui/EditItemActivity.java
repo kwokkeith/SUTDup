@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.application.sutdup.R;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class EditItemActivity extends AppCompatActivity {
     ImageView imageView;
     String imageString = "";
 
-    Button editchangesBtn;
+    Button editchangesBtn , deleteitemBtn;
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class EditItemActivity extends AppCompatActivity {
         itemprice = findViewById(R.id.itemPriceet);
         imageView = findViewById(R.id.itemImageStringet);
         editchangesBtn = findViewById(R.id.editItemBtn);
+        deleteitemBtn = findViewById(R.id.deleteItemBtn);
 
         /**Getting datas from Profile activity when cardview is clicked to edit an item**/
         Intent intent = getIntent();
@@ -58,6 +60,7 @@ public class EditItemActivity extends AppCompatActivity {
         itemname.setText(itemnamedata);
         itemprice.setText(itempricedata);
         imageString = itemimagedata;
+
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +109,21 @@ public class EditItemActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+
+            }
+        });
+
+        deleteitemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items").child(itemiddata);
+                itemRef.removeValue();
+                Toast.makeText(EditItemActivity.this, "Deleted item dont sad", Toast.LENGTH_SHORT).show();
+                //to go back to profile page
+                Intent intent = new Intent(EditItemActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
 
             }
         });
