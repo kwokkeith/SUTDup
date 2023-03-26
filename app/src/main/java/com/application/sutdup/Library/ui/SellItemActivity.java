@@ -2,6 +2,7 @@ package com.application.sutdup.Library.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -40,8 +41,9 @@ public class SellItemActivity extends AppCompatActivity {
     private String userId;
 
     private ImageView imageView;
-    private String imageString = "";
+    private String imageString = null;
 
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,14 @@ public class SellItemActivity extends AppCompatActivity {
         //get login info
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = preferences.getString("userId_key", "");
+
+        Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.anya);
+        ByteArrayOutputStream defaultByteArrayOutputStream = new ByteArrayOutputStream();
+        defaultBitmap.compress(Bitmap.CompressFormat.JPEG, 50, defaultByteArrayOutputStream); //suppressed some red lines so if it crashes blame this line -zh
+        byte[] defaultByteArray = defaultByteArrayOutputStream.toByteArray();
+        imageString = Base64.encodeToString(defaultByteArray, Base64.DEFAULT);
+        imageView.setImageBitmap(defaultBitmap);
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +98,8 @@ public class SellItemActivity extends AppCompatActivity {
             }}
         });
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -128,13 +140,8 @@ public class SellItemActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            // Encode the default image to a string and save it to the database
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.anya);
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
-            byte[] byteArray = byteArrayOutputStream.toByteArray();
-            imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
+
+
     }
 }
