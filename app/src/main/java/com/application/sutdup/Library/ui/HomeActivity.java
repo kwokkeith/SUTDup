@@ -166,7 +166,18 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
 
     @Override
     public void onItemClicked(ShopData shopData) {
-        /**Do nothing when item is clicked**/
-        return;
+        /**Push Data to another activity when cardView is clicked**/
+        String itemname = shopData.getItemName();
+        String itemprice = shopData.getItemPrice();
+        String itemid = shopData.getItemId();
+        String itemimage = shopData.getItemImage();
+        String itemdescription = shopData.getItemDescription();
+        Intent intent = new Intent(getApplicationContext(),ViewItemActivity.class);
+        intent.putExtra("itemname",itemname);
+        intent.putExtra("itemprice",itemprice);
+        intent.putExtra("itemid",itemid);
+        intent.putExtra("itemimage",itemimage);
+        intent.putExtra("itemdescription",itemdescription);
+        startActivity(intent);
     }
 }
