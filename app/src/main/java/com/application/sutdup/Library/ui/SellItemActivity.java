@@ -51,6 +51,7 @@ public class SellItemActivity extends AppCompatActivity {
 
         EditText editTextItemName = findViewById(R.id.editTextItemName);
         EditText editTextItemPrice = findViewById(R.id.editTextItemPrice);
+        EditText editTextItemDescription = findViewById(R.id.editTextItemDescription);
         Button upload = findViewById(R.id.uploaditemBtn);
         imageView = findViewById(R.id.imageView);
 
@@ -60,7 +61,7 @@ public class SellItemActivity extends AppCompatActivity {
 
         Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.anya);
         ByteArrayOutputStream defaultByteArrayOutputStream = new ByteArrayOutputStream();
-        defaultBitmap.compress(Bitmap.CompressFormat.JPEG, 50, defaultByteArrayOutputStream); //suppressed some red lines so if it crashes blame this line -zh
+        defaultBitmap.compress(Bitmap.CompressFormat.JPEG, 10, defaultByteArrayOutputStream); //suppressed some red lines so if it crashes blame this line -zh
         byte[] defaultByteArray = defaultByteArrayOutputStream.toByteArray();
         imageString = Base64.encodeToString(defaultByteArray, Base64.DEFAULT);
         imageView.setImageBitmap(defaultBitmap);
@@ -81,6 +82,7 @@ public class SellItemActivity extends AppCompatActivity {
                 // Retrieve the values entered by the user in these EditText widgets
                 String itemName = editTextItemName.getText().toString().trim();
                 String itemPrice = editTextItemPrice.getText().toString().trim();
+                String itemDescription = editTextItemDescription.getText().toString().trim();
                 String newItemKey = databaseReference.child("items").push().getKey();
 
                 if(itemName.isEmpty() || itemPrice.isEmpty() ){
@@ -88,7 +90,7 @@ public class SellItemActivity extends AppCompatActivity {
 
                 else {
                 // Do something with these values, e.g., save them to a database
-                ShopData shopdata = new ShopData(userId, newItemKey, itemName, itemPrice, imageString);
+                ShopData shopdata = new ShopData(userId, newItemKey, itemName, itemPrice, imageString, itemDescription);
                 databaseReference.child("items").child(newItemKey).setValue(shopdata);
 
                 //to go back to profile page
@@ -129,7 +131,7 @@ public class SellItemActivity extends AppCompatActivity {
                 }
                 bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
 

@@ -27,7 +27,7 @@ import java.io.IOException;
 
 public class EditItemActivity extends AppCompatActivity {
 //random comment
-    TextView itemname,itemprice;
+    TextView itemname,itemprice, itemdescription;
     ImageView imageView;
     String imageString = "";
 
@@ -40,6 +40,7 @@ public class EditItemActivity extends AppCompatActivity {
 
         itemname = findViewById(R.id.itemNameet);
         itemprice = findViewById(R.id.itemPriceet);
+        itemdescription = findViewById(R.id.itemDescriptionet);
         imageView = findViewById(R.id.itemImageStringet);
         editchangesBtn = findViewById(R.id.editItemBtn);
         deleteitemBtn = findViewById(R.id.deleteItemBtn);
@@ -50,6 +51,7 @@ public class EditItemActivity extends AppCompatActivity {
         String itempricedata = intent.getStringExtra("itemprice");
         String itemiddata = intent.getStringExtra("itemid");
         String itemimagedata = intent.getStringExtra("itemimage");
+        String itemdescriptiondata = intent.getStringExtra("itemdescription");
 
         byte[] decodedString = Base64.decode(itemimagedata, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -59,6 +61,7 @@ public class EditItemActivity extends AppCompatActivity {
 
         itemname.setText(itemnamedata);
         itemprice.setText(itempricedata);
+        itemdescription.setText(itemdescriptiondata);
         imageString = itemimagedata;
 
 
@@ -94,6 +97,7 @@ public class EditItemActivity extends AppCompatActivity {
                 // Retrieve the values entered by the user in these EditText widgets
                 String itemName = itemname.getText().toString().trim();
                 String itemPrice = itemprice.getText().toString().trim();
+                String itemDescription = itemdescription.getText().toString().trim();
 
                 if(itemName.isEmpty() || itemPrice.isEmpty() ){
                     Toast.makeText(EditItemActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
@@ -102,6 +106,7 @@ public class EditItemActivity extends AppCompatActivity {
                     reference.child(itemiddata).child("itemName").setValue(itemName);
                     reference.child(itemiddata).child("itemPrice").setValue(itemPrice);
                     reference.child(itemiddata).child("itemImage").setValue(imageString);
+                    reference.child(itemiddata).child("itemDescription").setValue(itemDescription);
 
                     Toast.makeText(EditItemActivity.this, "Successfully edited", Toast.LENGTH_SHORT).show();
                     //to go back to profile page
@@ -159,7 +164,7 @@ public class EditItemActivity extends AppCompatActivity {
                 }
                 bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
@@ -174,7 +179,7 @@ public class EditItemActivity extends AppCompatActivity {
             // Encode the default image to a string and save it to the database
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.anya);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream.toByteArray();
             imageString = Base64.encodeToString(byteArray, Base64.DEFAULT);
         }

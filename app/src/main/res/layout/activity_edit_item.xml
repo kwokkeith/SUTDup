@@ -37,6 +37,20 @@
         android:paddingStart="20dp"
         android:paddingEnd="0dp"  />
 
+    <EditText
+        android:id="@+id/itemDescriptionet"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_edittext"
+        android:drawablePadding="20dp"
+        android:hint="Item Description"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textColorHint="@color/black" />
+
     <ImageView
         android:id="@+id/itemImageStringet"
         android:layout_width="300dp"
