@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         EditText phone = findViewById(R.id.phone);
+        EditText telehandle = findViewById(R.id.telehandle);
         Button register = findViewById(R.id.registerBtn);
         EditText password = findViewById(R.id.password);
         EditText confirmPass = findViewById(R.id.confirmPassword);
@@ -44,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String passwordTxt = password.getText().toString();
                 String conPasswordTxt = confirmPass.getText().toString();
                 String nameTxt = name.getText().toString();
+                String telehandleTxt = telehandle.getText().toString();
 
                 if(phoneTxt.isEmpty() || passwordTxt.isEmpty() || conPasswordTxt.isEmpty()){
                     Toast.makeText(RegisterActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
@@ -61,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                             else{
 
-                                UserData userData = new UserData(nameTxt,passwordTxt,phoneTxt);
+                                UserData userData = new UserData(nameTxt,passwordTxt,phoneTxt,telehandleTxt);
                                 databaseReference.child("users").child(phoneTxt).setValue(userData);
 
 //                                databaseReference.child("users").child(phoneTxt).child("password").setValue(passwordTxt);

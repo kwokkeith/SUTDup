@@ -9,6 +9,13 @@
     android:background="@drawable/mob"
     tools:context=".Library.ui.EditItemActivity">
 
+    <ImageView
+        android:id="@+id/itemImageStringet"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/anya" />
+
     <EditText
         android:id="@+id/itemNameet"
         android:layout_width="match_parent"
@@ -51,12 +58,7 @@
         android:paddingEnd="0dp"
         android:textColorHint="@color/black" />
 
-    <ImageView
-        android:id="@+id/itemImageStringet"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/anya" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/editItemBtn"

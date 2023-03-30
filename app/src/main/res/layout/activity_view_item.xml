@@ -50,7 +50,7 @@
         android:paddingEnd="0dp"  />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/interestedBtn"
+        android:id="@+id/iwanttobuyBtn"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"

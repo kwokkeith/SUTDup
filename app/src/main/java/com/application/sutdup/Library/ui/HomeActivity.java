@@ -172,12 +172,14 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         String itemid = shopData.getItemId();
         String itemimage = shopData.getItemImage();
         String itemdescription = shopData.getItemDescription();
+        String sellertelehandle = shopData.getSellerTelehandle();
         Intent intent = new Intent(getApplicationContext(),ViewItemActivity.class);
         intent.putExtra("itemname",itemname);
         intent.putExtra("itemprice",itemprice);
         intent.putExtra("itemid",itemid);
         intent.putExtra("itemimage",itemimage);
         intent.putExtra("itemdescription",itemdescription);
+        intent.putExtra("sellertelehandle",sellertelehandle);
         startActivity(intent);
     }
 }

@@ -2,9 +2,7 @@ package com.application.sutdup.Library.ui;
 
 public class UserData {
 
-    private String name;
-    private String password;
-    private String phone;
+    private String name,password,phone,telehandle;
 
     public String getName() {
         return name;
@@ -30,12 +28,21 @@ public class UserData {
         this.phone = phone;
     }
 
+    public String getTelehandle() {
+        return telehandle;
+    }
+
+    public void setTelehandle(String telehandle) {
+        this.telehandle = telehandle;
+    }
+
     UserData(){}
 
-    UserData(String name , String password, String phone){
+    UserData(String name , String password, String phone, String telehandle){
         this.name = name;
         this.password = password;
         this.phone = phone;
+        this.telehandle = telehandle;
     }
 
 }

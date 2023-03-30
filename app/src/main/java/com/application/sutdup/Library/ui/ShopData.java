@@ -2,7 +2,7 @@ package com.application.sutdup.Library.ui;
 
 public class ShopData {
 
-    public String userId, itemId, key, itemImage, itemName,itemPrice, itemDescription;
+    public String userId, itemId, key, itemImage, itemName,itemPrice, itemDescription, sellerTelehandle;
 
     public String getKey() {
         return key;
@@ -56,17 +56,26 @@ public class ShopData {
         return itemDescription;
     }
 
+    public String getSellerTelehandle() {
+        return sellerTelehandle;
+    }
+
+    public void setSellerTelehandle(String sellerTelehandle) {
+        this.sellerTelehandle = sellerTelehandle;
+    }
+
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
 
-    ShopData(String userId, String itemId , String itemName, String itemPrice, String itemImage, String itemDescription) {
+    ShopData(String userId, String itemId , String itemName, String itemPrice, String itemImage, String itemDescription, String sellerTelehandle) {
         this.userId = userId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemId = itemId;
         this.itemImage = itemImage;
         this.itemDescription = itemDescription;
+        this.sellerTelehandle = sellerTelehandle;
     }
     ShopData(){}
 

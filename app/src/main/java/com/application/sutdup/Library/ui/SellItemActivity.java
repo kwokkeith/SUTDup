@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,15 +23,19 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.application.sutdup.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//this is meant to be sell item but im too lazy to change the name for it
 public class SellItemActivity extends AppCompatActivity {
 
     //database reference
@@ -42,6 +47,7 @@ public class SellItemActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private String imageString = null;
+
 
     @SuppressLint("WrongThread")
     @Override
@@ -58,6 +64,7 @@ public class SellItemActivity extends AppCompatActivity {
         //get login info
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = preferences.getString("userId_key", "");
+
 
         Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.anya);
         ByteArrayOutputStream defaultByteArrayOutputStream = new ByteArrayOutputStream();
@@ -76,6 +83,7 @@ public class SellItemActivity extends AppCompatActivity {
             }
         });
 
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,20 +93,37 @@ public class SellItemActivity extends AppCompatActivity {
                 String itemDescription = editTextItemDescription.getText().toString().trim();
                 String newItemKey = databaseReference.child("items").push().getKey();
 
-                if(itemName.isEmpty() || itemPrice.isEmpty() ){
-                    Toast.makeText(SellItemActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();}
+                DatabaseReference userRef = databaseReference.child("users").child(userId);
 
-                else {
-                // Do something with these values, e.g., save them to a database
-                ShopData shopdata = new ShopData(userId, newItemKey, itemName, itemPrice, imageString, itemDescription);
-                databaseReference.child("items").child(newItemKey).setValue(shopdata);
+                // Retrieve the value of the telehandle for the current user and store in sellerTelehandle
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            String telehandle = dataSnapshot.child("telehandle").getValue().toString();
 
-                //to go back to profile page
-                Intent intent = new Intent(SellItemActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }}
+                            if(itemName.isEmpty() || itemPrice.isEmpty() ){
+                                Toast.makeText(SellItemActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Do something with these values, e.g., save them to a database
+                                ShopData shopdata = new ShopData(userId, newItemKey, itemName, itemPrice, imageString, itemDescription, telehandle);
+                                databaseReference.child("items").child(newItemKey).setValue(shopdata);
+
+                                //to go back to profile page
+                                Intent intent = new Intent(SellItemActivity.this, ProfileActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+            }
         });
+
     }
 
 
