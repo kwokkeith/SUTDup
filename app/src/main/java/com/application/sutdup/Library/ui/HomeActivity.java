@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         // Retrieve the stored user ID from SharedPreferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userId = preferences.getString("name_key", "");
-        userNameTextView.setText(userId);
+        userNameTextView.setText("Hi, " +userId);
 
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();

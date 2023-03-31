@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/mob"
+    android:background="@drawable/gradient"
     tools:context=".Library.ui.EditItemActivity">
 
     <ImageView
@@ -65,9 +65,10 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/black"
         android:background="@drawable/custom_edittext"
         android:text="Edit Changes"
+        android:textColor="@color/white"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -76,6 +77,6 @@
         android:layout_height="30dp"
         android:layout_margin="10dp"
         android:background="@drawable/baseline_delete_24"
-        android:backgroundTint="@color/white" />
+        android:backgroundTint="@color/black" />
 
 </LinearLayout>

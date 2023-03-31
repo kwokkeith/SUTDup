@@ -7,21 +7,15 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Library.ui.LoginActivity"
-    android:background="@drawable/mob">
+    android:background="@drawable/gradient">
 
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/sutdup_noline"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:text="Login Here"
-
-        />
     <EditText
         android:id="@+id/phone"
         android:layout_width="match_parent"
@@ -59,9 +53,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/black"
         android:background="@drawable/custom_edittext"
         android:text="Login"
+        android:textColor="@color/white"
         />
 
     <LinearLayout
