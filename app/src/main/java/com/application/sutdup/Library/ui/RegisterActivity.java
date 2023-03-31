@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.sutdup.Library.PasswordEncryption;
 import com.application.sutdup.R;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,8 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String phoneTxt = phone.getText().toString();
-                String passwordTxt = password.getText().toString();
-                String conPasswordTxt = confirmPass.getText().toString();
+                //String passwordTxt = password.getText().toString();
+                //String conPasswordTxt = confirmPass.getText().toString();
+                String passwordTxt = PasswordEncryption.encryptAndEncode(password.getText().toString());
+                String conPasswordTxt = PasswordEncryption.encryptAndEncode(confirmPass.getText().toString());
                 String nameTxt = name.getText().toString();
                 String telehandleTxt = telehandle.getText().toString();
 

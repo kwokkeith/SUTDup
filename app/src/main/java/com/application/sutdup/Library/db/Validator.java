@@ -108,13 +108,13 @@ public class Validator {
      * Checks if input string is a valid Singapore phone number
      * @param input: String
      **/
-    public static void isSGPhoneNumber(String input) throws Exception
+    public static boolean isSGPhoneNumber(String input)
     {
 
         if(!(input.length() == 8 && input.matches("[0-9]+"))){
-            throw new ValidatorException( "isSGPhoneNumber", "Input String must " +
-                    "be of the format (dddd dddd) i.e. 9838 7583.");
+            return false;
         }
+        return true;
     }
 
     /**

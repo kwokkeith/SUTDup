@@ -72,12 +72,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/deleteItemBtn"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/white"
-        android:background="@drawable/custom_edittext"
-        android:text="Delete item"
-        />
+        android:background="@drawable/baseline_delete_24"
+        android:backgroundTint="@color/white" />
 
 </LinearLayout>

@@ -195,6 +195,7 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
     @Override
     public void onItemClicked(ShopData shopData) {
         /**Do nothing when item is clicked**/
+
         return;
     }
 }

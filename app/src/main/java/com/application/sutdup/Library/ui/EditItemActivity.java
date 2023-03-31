@@ -1,7 +1,9 @@
 package com.application.sutdup.Library.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -122,15 +124,32 @@ public class EditItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items").child(itemiddata);
-                itemRef.removeValue();
-                Toast.makeText(EditItemActivity.this, "Deleted item dont sad", Toast.LENGTH_SHORT).show();
-                //to go back to profile page
-                Intent intent = new Intent(EditItemActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
+                AlertDialog.Builder alert = new AlertDialog.Builder(EditItemActivity.this);
+                alert.setMessage("Do you want to delete this item?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()                 {
 
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                try {
+                                    DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items").child(itemiddata);
+                                    itemRef.removeValue();
+                                    //to go back to profile page
+                                    Intent intent = new Intent(EditItemActivity.this, ProfileActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }catch (Exception e){
+                                    Toast.makeText(EditItemActivity.this, "Unable to delete item", Toast.LENGTH_SHORT).show();
+                                }
+
+
+                            }
+                        }).setNegativeButton("Cancel", null);
+
+                AlertDialog alert1 = alert.create();
+                alert1.show();
             }
+
+
         });
 
 

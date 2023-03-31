@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.sutdup.Library.PasswordEncryption;
 import com.application.sutdup.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //Shared preference
     SharedPreferences sharedpreferences;
+    private TextView TriesLeft;
+    private int counter = 5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +40,19 @@ public class LoginActivity extends AppCompatActivity {
         Button loginBtn = findViewById(R.id.loginBtn);
         TextView registerNowBtn = findViewById(R.id.registerNowBtn);
 
-
-
-
+        TriesLeft = findViewById(R.id.triesLeft);
+        TriesLeft.setText("No. of attempts remaining: 5");
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                String encrypted = PasswordEncryption.encryptAndEncode("123");
+
                 String phoneTxt = phone.getText().toString();
                 String passwordTxt = password.getText().toString();
+
+                String PasswordEncrypted = PasswordEncryption.encryptAndEncode(password.getText().toString());
 
                 if(phoneTxt.isEmpty() || passwordTxt.isEmpty()){
                     Toast.makeText(LoginActivity.this, "Please enter your details", Toast.LENGTH_SHORT).show();
@@ -62,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String getPassword = snapshot.child(phoneTxt).child("password").getValue(String.class);
                                 String name = snapshot.child(phoneTxt).child("name").getValue(String.class);
 
-                                if(getPassword.equals(passwordTxt)){
+                                if(getPassword.equals(PasswordEncrypted)){
                                     Toast.makeText(LoginActivity.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
                                     Intent pass = new Intent(LoginActivity.this, HomeActivity.class);
 
@@ -76,11 +82,18 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 else {
                                     Toast.makeText(LoginActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
+                                    counter--;
+                                    TriesLeft.setText("No. of attempts remaining: "+counter);
                                 }
 
                             }
                             else{
                                 Toast.makeText(LoginActivity.this, "Wrong mobile no", Toast.LENGTH_SHORT).show();
+                                counter--;
+                                TriesLeft.setText("No. of attempts remaining: "+counter);
+                            }
+                            if(counter ==0){
+                                loginBtn.setEnabled(false);
                             }
 
                         }

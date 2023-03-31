@@ -1,13 +1,16 @@
 package com.application.sutdup.Library.ui;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -166,20 +169,52 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
 
     @Override
     public void onItemClicked(ShopData shopData) {
-        /**Push Data to another activity when cardView is clicked**/
+
+        String sellertelehandle = shopData.getSellerTelehandle();
+        showPopup(sellertelehandle);
+
+        /**Push Data to another activity when cardView is clicked
         String itemname = shopData.getItemName();
         String itemprice = shopData.getItemPrice();
         String itemid = shopData.getItemId();
         String itemimage = shopData.getItemImage();
         String itemdescription = shopData.getItemDescription();
         String sellertelehandle = shopData.getSellerTelehandle();
-        Intent intent = new Intent(getApplicationContext(),ViewItemActivity.class);
+
+
+       Intent intent = new Intent(getApplicationContext(),ViewItemActivity.class);
         intent.putExtra("itemname",itemname);
         intent.putExtra("itemprice",itemprice);
         intent.putExtra("itemid",itemid);
         intent.putExtra("itemimage",itemimage);
         intent.putExtra("itemdescription",itemdescription);
         intent.putExtra("sellertelehandle",sellertelehandle);
-        startActivity(intent);
+        startActivity(intent);**/
+
+
+    }
+
+    private void showPopup(String sellertelehandle) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(HomeActivity.this);
+        alert.setMessage("Are you interested in this item? If yes, do you want to proceed to contact the seller?")
+                .setPositiveButton("Proceed", new DialogInterface.OnClickListener()                 {
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        try {
+                            Intent telegramIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/"+sellertelehandle));
+                            telegramIntent.setPackage("org.telegram.messenger");
+
+                            startActivity(telegramIntent);
+                        }catch (Exception e){
+                            Toast.makeText(HomeActivity.this, "Unable to open Telegram", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                }).setNegativeButton("Cancel", null);
+
+        AlertDialog alert1 = alert.create();
+        alert1.show();
     }
 }
