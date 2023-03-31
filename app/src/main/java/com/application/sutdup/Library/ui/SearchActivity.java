@@ -1,12 +1,15 @@
 package com.application.sutdup.Library.ui;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -197,8 +200,32 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
 
     @Override
     public void onItemClicked(ShopData shopData) {
-        /**Do nothing when item is clicked**/
+        String sellertelehandle = shopData.getSellerTelehandle();
+        showPopup(sellertelehandle);
 
-        return;
+    }
+
+    private void showPopup(String sellertelehandle) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(SearchActivity.this);
+        alert.setMessage("Are you interested in this item? If yes, do you want to proceed to contact the seller?")
+                .setPositiveButton("Proceed", new DialogInterface.OnClickListener()                 {
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        try {
+                            Intent telegramIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/"+sellertelehandle));
+                            telegramIntent.setPackage("org.telegram.messenger");
+
+                            startActivity(telegramIntent);
+                        }catch (Exception e){
+                            Toast.makeText(SearchActivity.this, "Unable to open Telegram", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                }).setNegativeButton("Cancel", null);
+
+        AlertDialog alert1 = alert.create();
+        alert1.show();
     }
 }
