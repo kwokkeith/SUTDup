@@ -67,6 +67,24 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(myAdapter);
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy < 0) {
+                    // Scrolled up, show floating action button
+                    addItemfab.show();
+                } else if (dy > 0) {
+                    // Scrolled down, hide floating action button
+                    addItemfab.hide();
+                }
+            }
+        });
+
 
         /**implementing the abstract class Database**/
         Database database = new Database() {

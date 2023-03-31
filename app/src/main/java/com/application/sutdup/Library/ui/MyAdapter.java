@@ -3,6 +3,7 @@ package com.application.sutdup.Library.ui;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -74,6 +75,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        if (position + 1 == getItemCount()) {
+            // It is the last item of the list
+
+            // Set bottom margin to 72dp
+            setBottomMargin(holder.itemView, (int) (72 * Resources.getSystem().getDisplayMetrics().density));
+        } else {
+            // Reset bottom margin back to zero
+            setBottomMargin(holder.itemView, 0);
+        }
 
         ShopData data = shopDataArrayList.get(position);
         holder.name.setText(data.getItemName());
@@ -96,11 +106,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         byte[] decodedString = Base64.decode(data.getItemImage(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         holder.itemImage.setImageBitmap(decodedByte);
+
+
     }
+
+
 
     @Override
     public int getItemCount() {
         return shopDataArrayList.size();
+    }
+
+    private static void setBottomMargin(View view, int bottomMargin) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            params.setMargins(params.leftMargin, params.topMargin, params.rightMargin, bottomMargin);
+            view.requestLayout();
+        }
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
