@@ -69,7 +69,7 @@ public class SellItemActivity extends AppCompatActivity {
         userId = preferences.getString("userId_key", "");
 
 
-        Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.anya);
+        Bitmap defaultBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.no_image);
         ByteArrayOutputStream defaultByteArrayOutputStream = new ByteArrayOutputStream();
         defaultBitmap.compress(Bitmap.CompressFormat.JPEG, 10, defaultByteArrayOutputStream); //suppressed some red lines so if it crashes blame this line -zh
         byte[] defaultByteArray = defaultByteArrayOutputStream.toByteArray();

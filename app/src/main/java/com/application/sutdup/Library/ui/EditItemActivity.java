@@ -199,7 +199,7 @@ public class EditItemActivity extends AppCompatActivity {
             }
         } else {
             // Encode the default image to a string and save it to the database
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.anya);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.no_image);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream.toByteArray();
