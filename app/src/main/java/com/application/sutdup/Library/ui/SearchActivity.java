@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.SearchView;
@@ -172,10 +173,12 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
                     case R.id.search:
 
                     case R.id.home:
+                        chipNavigationBar.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.profile:
+                        chipNavigationBar.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
                         break;

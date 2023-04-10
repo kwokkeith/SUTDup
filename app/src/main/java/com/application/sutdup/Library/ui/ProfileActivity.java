@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -190,14 +191,17 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
 
                 switch (i){
                     case R.id.search:
+                        chipNavigationBar.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                         startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.home:
+                        chipNavigationBar.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         overridePendingTransition(0,0);
                         break;
                     case R.id.profile:
+
                 }
             }
         });
@@ -206,6 +210,7 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
         addItemfab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP);
                 startActivity(new Intent(ProfileActivity.this, SellItemActivity.class));
             }
         });
