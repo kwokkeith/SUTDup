@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -37,6 +39,7 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
     MyAdapter myAdapter;
     ArrayList<ShopData> shopDataArrayList;
     ArrayList<UserData> userDataArrayList;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,9 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
         //hide status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_search);
+        // Retrieve the stored user ID from SharedPreferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        userId = preferences.getString("userId_key", "");
 
 
 
@@ -119,6 +125,9 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     System.out.println(snapshot.getChildren());
                     ShopData shopData = dataSnapshot.getValue(ShopData.class);
+                    if (shopData.getUserId().equals(userId)){
+                        continue;
+                    }
                     //add to the values to te array list
                     shopDataArrayList.add(shopData);
                 }
@@ -153,29 +162,6 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
 
             }
         });
-
-       /*
-        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView); //Initialize and assign variable
-        //bottomNavigationView.setSelectedItemId(R.id.search);  //Set Home Selected
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.search:
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
-            }
-        });*/
-
         ChipNavigationBar chipNavigationBar = findViewById(R.id.bottomNavView);
         chipNavigationBar.setItemSelected(R.id.search,true);
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {

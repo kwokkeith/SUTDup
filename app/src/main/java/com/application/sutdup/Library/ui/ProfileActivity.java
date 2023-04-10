@@ -1,11 +1,13 @@
 package com.application.sutdup.Library.ui;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 public class ProfileActivity extends AppCompatActivity implements SelectListener {
 
     RecyclerView recyclerView;
+    Button logout;
     DatabaseReference databaseReference,databaseUser;
     MyAdapter myAdapter;
     ArrayList<ShopData> shopDataArrayList;
@@ -51,6 +54,35 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
 
         recyclerView = findViewById(R.id.shopList);
         addItemfab =findViewById(R.id.fab);
+        logout = findViewById(R.id.btnLogOut);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopup();
+            }
+            public void showPopup() {
+                AlertDialog.Builder alert = new AlertDialog.Builder(ProfileActivity.this);
+                alert.setMessage("Are you sure you want to Log Out?")
+                        .setPositiveButton("Logout", new DialogInterface.OnClickListener()                 {
+
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                logout(); // Last step. Logout function
+
+                            }
+                        }).setNegativeButton("Cancel", null);
+
+                AlertDialog alert1 = alert.create();
+                alert1.show();
+            }
+
+            public void logout() {
+                Intent i = new Intent(ProfileActivity.this, LoginActivity.class);
+                // set the new task and clear flags
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+            }
+        });
 
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
@@ -125,6 +157,7 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
             }
         });
 
+
         database.setDatabaseReference("users");
         databaseUser = database.getDatabaseReference();
         //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
@@ -147,36 +180,8 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
-
-        /*
-        //Initialize and assign variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
-        //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.profile);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.search:
-                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.profile:
-                        return true;
-
-
-                }
-                return false;
-            }
-        });*/
-
-
         ChipNavigationBar chipNavigationBar = findViewById(R.id.bottomNavView);
         chipNavigationBar.setItemSelected(R.id.profile,true);
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {

@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.application.sutdup.Library.Validators;
 import com.application.sutdup.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -106,6 +107,9 @@ public class EditItemActivity extends AppCompatActivity {
 
                 if(itemName.isEmpty() || itemPrice.isEmpty() ){
                     Toast.makeText(EditItemActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                }
+                if (!Validators.isNumber(itemPrice)){
+                    Toast.makeText(EditItemActivity.this, "Item Price is invalid", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     reference.child(itemiddata).child("itemName").setValue(itemName);

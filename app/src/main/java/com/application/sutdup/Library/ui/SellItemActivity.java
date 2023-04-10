@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.application.sutdup.Library.Validators;
 import com.application.sutdup.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -107,7 +108,11 @@ public class SellItemActivity extends AppCompatActivity {
 
                             if(itemName.isEmpty() || itemPrice.isEmpty() ){
                                 Toast.makeText(SellItemActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
-                            } else {
+                            }
+                            if (!Validators.isNumber(itemPrice)){
+                                Toast.makeText(SellItemActivity.this, "Item Price is invalid", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
                                 // Do something with these values, e.g., save them to a database
                                 ShopData shopdata = new ShopData(userId, newItemKey, itemName, itemPrice, imageString, itemDescription, telehandle);
                                 databaseReference.child("items").child(newItemKey).setValue(shopdata);

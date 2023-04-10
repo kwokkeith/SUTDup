@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.sutdup.Library.PasswordEncryption;
+import com.application.sutdup.Library.Validators;
 import com.application.sutdup.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     //Editors : Sufi
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://sutdup-a7537-default-rtdb.asia-southeast1.firebasedatabase.app/");
-
+    String NumberRegex= ".*[0-9].*";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,10 +53,17 @@ public class RegisterActivity extends AppCompatActivity {
                 String nameTxt = name.getText().toString();
                 String telehandleTxt = telehandle.getText().toString();
 
-                if(phoneTxt.isEmpty() || passwordTxt.isEmpty() || conPasswordTxt.isEmpty()){
+                if(phoneTxt.isEmpty() || passwordTxt.isEmpty() || conPasswordTxt.isEmpty() || telehandleTxt.isEmpty()){
                     Toast.makeText(RegisterActivity.this, "Please fill in all the fields", Toast.LENGTH_SHORT).show();
-                } else if (!passwordTxt.equals(conPasswordTxt)) {
+                }
+                if (!passwordTxt.equals(conPasswordTxt)) {
                     Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                }
+                if (Validators.lengthCheck(passwordTxt)) {
+                    Toast.makeText(RegisterActivity.this, "Password is too short", Toast.LENGTH_SHORT).show();
+                }
+                if (Validators.isSGPhoneNumber(phoneTxt)){
+                    Toast.makeText(RegisterActivity.this, "Input a valid SG phone number", Toast.LENGTH_SHORT).show();
                 }
                 else{
 
@@ -70,10 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 UserData userData = new UserData(nameTxt,passwordTxt,phoneTxt,telehandleTxt);
                                 databaseReference.child("users").child(phoneTxt).setValue(userData);
-
-//                                databaseReference.child("users").child(phoneTxt).child("password").setValue(passwordTxt);
-//                                databaseReference.child("users").child(phoneTxt).child("name").setValue(nameTxt);
-
                                 Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                                 finish();
 

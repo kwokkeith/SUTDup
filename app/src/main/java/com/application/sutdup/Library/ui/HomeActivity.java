@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
     ArrayList<ShopData> shopDataArrayList;
     ArrayList<UserData> userDataArrayList;
     TextView userNameTextView;
-    private String userId;
+    private String userName,userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +54,9 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
 
         // Retrieve the stored user ID from SharedPreferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        userId = preferences.getString("name_key", "");
-        userNameTextView.setText("Hi, " +userId);
+        userName = preferences.getString("name_key", "");
+        userId = preferences.getString("userId_key", "");
+        userNameTextView.setText("Hi, " +userName);
 
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
@@ -88,6 +89,9 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     System.out.println(snapshot.getChildren());
                     ShopData shopData = dataSnapshot.getValue(ShopData.class);
+                    if (shopData.getUserId().equals(userId)){
+                        continue;
+                    }
                     //add to the values to the array list
                     shopDataArrayList.add(shopData);
                 }

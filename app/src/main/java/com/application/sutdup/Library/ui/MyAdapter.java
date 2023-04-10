@@ -105,6 +105,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         byte[] decodedString = Base64.decode(data.getItemImage(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
         holder.itemImage.setImageBitmap(decodedByte);
 
 
