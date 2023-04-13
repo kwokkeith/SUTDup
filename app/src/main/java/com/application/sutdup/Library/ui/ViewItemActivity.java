@@ -54,15 +54,21 @@ public class ViewItemActivity extends AppCompatActivity {
         imageString = itemimagedata;
 
 
+
         iwanttobuyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                String message = "Hello, I am interested in " + itemname;
                 Intent telegramIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/"+sellertelehandledata));
                 telegramIntent.setPackage("org.telegram.messenger");
+
+
 
                 startActivity(telegramIntent);
             }
         });
     }
+
+
 }

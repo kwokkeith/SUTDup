@@ -1,17 +1,22 @@
 package com.application.sutdup.Library.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -122,6 +127,7 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                shopDataArrayList.clear();
 
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     System.out.println(snapshot.getChildren());
@@ -191,6 +197,13 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
     public void onItemClicked(ShopData shopData) {
         String sellertelehandle = shopData.getSellerTelehandle();
         showPopup(sellertelehandle);
+        android.os.Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            VibrationEffect vibrationEffect = VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE);
+            vibrator.vibrate(vibrationEffect);
+        } else {
+            vibrator.vibrate(50);
+        }
 
     }
 
@@ -204,8 +217,9 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
                         try {
                             Intent telegramIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/"+sellertelehandle));
                             telegramIntent.setPackage("org.telegram.messenger");
-
                             startActivity(telegramIntent);
+
+
                         }catch (Exception e){
                             Toast.makeText(SearchActivity.this, "Unable to open Telegram", Toast.LENGTH_SHORT).show();
                         }

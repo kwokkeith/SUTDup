@@ -7,10 +7,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -218,6 +222,13 @@ public class ProfileActivity extends AppCompatActivity implements SelectListener
 
     @Override
     public void onItemClicked(ShopData shopData) {
+        android.os.Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            VibrationEffect vibrationEffect = VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE);
+            vibrator.vibrate(vibrationEffect);
+        } else {
+            vibrator.vibrate(50);
+        }
         /**Push Data to another activity when cardView is clicked**/
         String itemname = shopData.getItemName();
         String itemprice = shopData.getItemPrice();
