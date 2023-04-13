@@ -21,6 +21,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity implements SelectListener{
+public class SearchActivity extends AppCompatActivity implements SelectListener, View.OnClickListener{
     private SearchView searchView;
     private RecyclerView recyclerView;
     DatabaseReference databaseReference,databaseUser;
@@ -61,6 +62,7 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
 
         searchView = findViewById(R.id.serachView);
         searchView.clearFocus();
+        searchView.setOnClickListener(this);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -90,19 +92,10 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
             }
         });
         recyclerView = findViewById(R.id.shopList);
-
-
-
-        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView); //Initialize and assign variable
-        //bottomNavigationView.setSelectedItemId(R.id.search);  //Set Home Selected
-
-
         shopDataArrayList = new ArrayList<>();
         userDataArrayList = new ArrayList<>();
         myAdapter = new MyAdapter(this, shopDataArrayList,userDataArrayList,this);
-        //recyclerView.setHasFixedSize(true);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //recyclerView.setAdapter(myAdapter);
+
 
         /** Implementing Grid View**/
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
@@ -123,7 +116,6 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
         };
         database.setDatabaseReference("items");
         databaseReference = database.getDatabaseReference();
-        //databaseReference = FirebaseDatabase.getInstance().getReference("items"); //can delete later just leave it for now!!
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -230,5 +222,10 @@ public class SearchActivity extends AppCompatActivity implements SelectListener{
 
         AlertDialog alert1 = alert.create();
         alert1.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        searchView.setIconified(false);
     }
 }

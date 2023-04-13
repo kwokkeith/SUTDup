@@ -59,10 +59,10 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!passwordTxt.equals(conPasswordTxt)) {
                     Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                 }
-                if (Validators.lengthCheck(passwordTxt)) {
+                if (!Validators.lengthCheck(passwordTxt)) {
                     Toast.makeText(RegisterActivity.this, "Password is too short", Toast.LENGTH_SHORT).show();
                 }
-                if (Validators.isSGPhoneNumber(phoneTxt)){
+                if (!Validators.isSGPhoneNumber(phoneTxt)){
                     Toast.makeText(RegisterActivity.this, "Input a valid SG phone number", Toast.LENGTH_SHORT).show();
                 }
                 else{
