@@ -134,31 +134,6 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
             }
         });
 
-/**
-        //Initialize and assign variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView);
-        //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.home);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.search:
-                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.home:
-                        return true;
-                    case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
-            }
-        });
- **/
 
         ChipNavigationBar chipNavigationBar = findViewById(R.id.bottomNavView);
         chipNavigationBar.setItemSelected(R.id.home,true);
@@ -197,25 +172,6 @@ public class HomeActivity extends AppCompatActivity implements SelectListener {
         } else {
             vibrator.vibrate(50);
         }
-
-        /**Push Data to another activity when cardView is clicked
-        String itemname = shopData.getItemName();
-        String itemprice = shopData.getItemPrice();
-        String itemid = shopData.getItemId();
-        String itemimage = shopData.getItemImage();
-        String itemdescription = shopData.getItemDescription();
-        String sellertelehandle = shopData.getSellerTelehandle();
-
-
-       Intent intent = new Intent(getApplicationContext(),ViewItemActivity.class);
-        intent.putExtra("itemname",itemname);
-        intent.putExtra("itemprice",itemprice);
-        intent.putExtra("itemid",itemid);
-        intent.putExtra("itemimage",itemimage);
-        intent.putExtra("itemdescription",itemdescription);
-        intent.putExtra("sellertelehandle",sellertelehandle);
-        startActivity(intent);**/
-
 
     }
 
